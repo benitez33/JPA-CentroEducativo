@@ -1,178 +1,183 @@
 package CentroEducativo.vistas;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
+import CentroEducativo.controladores.ControladorMateria;
+import CentroEducativo.controladores.ControladorProfesor;
+import CentroEducativo.entidades.Estudiante;
+import CentroEducativo.entidades.Materia;
+import CentroEducativo.entidades.Profesor;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 import java.awt.Color;
-import javax.swing.ImageIcon;
 import javax.swing.JList;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
-public class PanelValoracionMateria extends JFrame {
+public class PanelValoracionMateria extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+	JComboBox<Materia> comboBoxMateria;
+	JComboBox<Profesor> comboBoxProfesor;
+	JComboBox<Integer> comboBoxNota;
+	JList<Estudiante> listNoSeleccionado;
+	JList<Estudiante> listSeleccionado;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PanelValoracionMateria frame = new PanelValoracionMateria();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	 * Create the panel.
 	 */
 	public PanelValoracionMateria() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 350);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[] { 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 126, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		setLayout(gridBagLayout);
 
-		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0};
-		gbl_contentPane.rowHeights = new int[]{84, 175, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(189, 177, 255));
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		contentPane.add(panel, gbc_panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel.setLayout(gbl_panel);
-		
+		JPanel panelArriba = new JPanel();
+		panelArriba.setBackground(new Color(189, 177, 255));
+		GridBagConstraints gbc_panelArriba = new GridBagConstraints();
+		gbc_panelArriba.insets = new Insets(0, 0, 5, 0);
+		gbc_panelArriba.fill = GridBagConstraints.BOTH;
+		gbc_panelArriba.gridx = 0;
+		gbc_panelArriba.gridy = 0;
+		add(panelArriba, gbc_panelArriba);
+		GridBagLayout gbl_panelArriba = new GridBagLayout();
+		gbl_panelArriba.columnWidths = new int[] { 0, 0, 0 };
+		gbl_panelArriba.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gbl_panelArriba.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panelArriba.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panelArriba.setLayout(gbl_panelArriba);
+
 		JLabel lblMateria = new JLabel("Materia:");
 		GridBagConstraints gbc_lblMateria = new GridBagConstraints();
 		gbc_lblMateria.anchor = GridBagConstraints.EAST;
 		gbc_lblMateria.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMateria.gridx = 0;
 		gbc_lblMateria.gridy = 0;
-		panel.add(lblMateria, gbc_lblMateria);
-		
-		JComboBox comboBox = new JComboBox();
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 1;
-		gbc_comboBox.gridy = 0;
-		panel.add(comboBox, gbc_comboBox);
-		
-		JLabel lblProfesor = new JLabel("Profesor:");
-		GridBagConstraints gbc_lblProfesor = new GridBagConstraints();
-		gbc_lblProfesor.anchor = GridBagConstraints.EAST;
-		gbc_lblProfesor.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProfesor.gridx = 0;
-		gbc_lblProfesor.gridy = 1;
-		panel.add(lblProfesor, gbc_lblProfesor);
-		
-		JComboBox comboBox_2 = new JComboBox();
-		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-		gbc_comboBox_2.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_2.gridx = 1;
-		gbc_comboBox_2.gridy = 1;
-		panel.add(comboBox_2, gbc_comboBox_2);
-		
-		JLabel lblNota = new JLabel("Nota:");
-		GridBagConstraints gbc_lblNota = new GridBagConstraints();
-		gbc_lblNota.anchor = GridBagConstraints.EAST;
-		gbc_lblNota.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNota.gridx = 0;
-		gbc_lblNota.gridy = 2;
-		panel.add(lblNota, gbc_lblNota);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 0);
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.gridx = 1;
-		gbc_comboBox_1.gridy = 2;
-		panel.add(comboBox_1, gbc_comboBox_1);
-		
-		JButton btnBotnActualizarAlumnado = new JButton("Botón actualizar alumnado");
-		GridBagConstraints gbc_btnBotnActualizarAlumnado = new GridBagConstraints();
-		gbc_btnBotnActualizarAlumnado.anchor = GridBagConstraints.EAST;
-		gbc_btnBotnActualizarAlumnado.gridx = 1;
-		gbc_btnBotnActualizarAlumnado.gridy = 3;
-		panel.add(btnBotnActualizarAlumnado, gbc_btnBotnActualizarAlumnado);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(249, 240, 107));
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 0;
-		gbc_panel_1.gridy = 1;
-		contentPane.add(panel_1, gbc_panel_1);
-		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 166, -22, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 71, 0, 0, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0};
-		panel_1.setLayout(gbl_panel_1);
-		
-		JLabel lblNewLabel = new JLabel("Alumnado no seleccionado");
+		panelArriba.add(lblMateria, gbc_lblMateria);
+
+		comboBoxMateria = new JComboBox();
+		comboBoxMateria.setToolTipText("");
+		GridBagConstraints gbc_comboBoxMateria = new GridBagConstraints();
+		gbc_comboBoxMateria.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxMateria.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxMateria.gridx = 1;
+		gbc_comboBoxMateria.gridy = 0;
+		panelArriba.add(comboBoxMateria, gbc_comboBoxMateria);
+
+		JLabel lblNewLabel = new JLabel("Profesor:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.gridwidth = 2;
+		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		panel_1.add(lblNewLabel, gbc_lblNewLabel);
-		
+		gbc_lblNewLabel.gridy = 1;
+		panelArriba.add(lblNewLabel, gbc_lblNewLabel);
+
+		comboBoxProfesor = new JComboBox();
+		GridBagConstraints gbc_comboBoxProfesor = new GridBagConstraints();
+		gbc_comboBoxProfesor.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxProfesor.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxProfesor.gridx = 1;
+		gbc_comboBoxProfesor.gridy = 1;
+		panelArriba.add(comboBoxProfesor, gbc_comboBoxProfesor);
+
+		JLabel lblNota = new JLabel("Nota:");
+		GridBagConstraints gbc_lblNota = new GridBagConstraints();
+		gbc_lblNota.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNota.anchor = GridBagConstraints.EAST;
+		gbc_lblNota.gridx = 0;
+		gbc_lblNota.gridy = 2;
+		panelArriba.add(lblNota, gbc_lblNota);
+
+		comboBoxNota = new JComboBox();
+		GridBagConstraints gbc_comboBoxNota = new GridBagConstraints();
+		gbc_comboBoxNota.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxNota.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxNota.gridx = 1;
+		gbc_comboBoxNota.gridy = 2;
+		panelArriba.add(comboBoxNota, gbc_comboBoxNota);
+
+		JButton btnBotonDeActualizado = new JButton("Botón actualizar alumno");
+		GridBagConstraints gbc_btnBotonDeActualizado = new GridBagConstraints();
+		gbc_btnBotonDeActualizado.anchor = GridBagConstraints.EAST;
+		gbc_btnBotonDeActualizado.gridx = 1;
+		gbc_btnBotonDeActualizado.gridy = 3;
+		panelArriba.add(btnBotonDeActualizado, gbc_btnBotonDeActualizado);
+
+		JPanel panelCentro = new JPanel();
+		panelCentro.setBackground(new Color(249, 240, 107));
+		GridBagConstraints gbc_panelCentro = new GridBagConstraints();
+		gbc_panelCentro.insets = new Insets(0, 0, 5, 0);
+		gbc_panelCentro.fill = GridBagConstraints.BOTH;
+		gbc_panelCentro.gridx = 0;
+		gbc_panelCentro.gridy = 1;
+		add(panelCentro, gbc_panelCentro);
+		GridBagLayout gbl_panelCentro = new GridBagLayout();
+		gbl_panelCentro.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panelCentro.rowHeights = new int[] { 0, 0, 0 };
+		gbl_panelCentro.columnWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panelCentro.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		panelCentro.setLayout(gbl_panelCentro);
+
+		JLabel lblAlumnosNoSeleccionados = new JLabel("Alumnado no seleccionado");
+		GridBagConstraints gbc_lblAlumnosNoSeleccionados = new GridBagConstraints();
+		gbc_lblAlumnosNoSeleccionados.fill = GridBagConstraints.VERTICAL;
+		gbc_lblAlumnosNoSeleccionados.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAlumnosNoSeleccionados.gridx = 0;
+		gbc_lblAlumnosNoSeleccionados.gridy = 0;
+		panelCentro.add(lblAlumnosNoSeleccionados, gbc_lblAlumnosNoSeleccionados);
+
 		JLabel lblAlumnadoSeleccionado = new JLabel("Alumnado seleccionado");
 		GridBagConstraints gbc_lblAlumnadoSeleccionado = new GridBagConstraints();
-		gbc_lblAlumnadoSeleccionado.gridwidth = 2;
+		gbc_lblAlumnadoSeleccionado.fill = GridBagConstraints.VERTICAL;
 		gbc_lblAlumnadoSeleccionado.insets = new Insets(0, 0, 5, 0);
-		gbc_lblAlumnadoSeleccionado.gridx = 7;
+		gbc_lblAlumnadoSeleccionado.gridx = 6;
 		gbc_lblAlumnadoSeleccionado.gridy = 0;
-		panel_1.add(lblAlumnadoSeleccionado, gbc_lblAlumnadoSeleccionado);
-		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(255, 120, 0));
-		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
-		gbc_panel_3.insets = new Insets(0, 0, 0, 5);
-		gbc_panel_3.gridwidth = 5;
-		gbc_panel_3.gridheight = 4;
-		gbc_panel_3.fill = GridBagConstraints.BOTH;
-		gbc_panel_3.gridx = 2;
-		gbc_panel_3.gridy = 1;
-		panel_1.add(panel_3, gbc_panel_3);
-		GridBagLayout gbl_panel_3 = new GridBagLayout();
-		gbl_panel_3.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_panel_3.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_3.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_3.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		panel_3.setLayout(gbl_panel_3);
-		
+		panelCentro.add(lblAlumnadoSeleccionado, gbc_lblAlumnadoSeleccionado);
+
+		listNoSeleccionado = new JList();
+		GridBagConstraints gbc_listNoSeleccionado = new GridBagConstraints();
+		gbc_listNoSeleccionado.insets = new Insets(0, 0, 0, 5);
+		gbc_listNoSeleccionado.fill = GridBagConstraints.BOTH;
+		gbc_listNoSeleccionado.gridx = 0;
+		gbc_listNoSeleccionado.gridy = 1;
+		panelCentro.add(listNoSeleccionado, gbc_listNoSeleccionado);
+
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 190, 111));
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_panel.gridwidth = 5;
+		gbc_panel.insets = new Insets(0, 0, 0, 5);
+		gbc_panel.gridx = 1;
+		gbc_panel.gridy = 1;
+		panelCentro.add(panel, gbc_panel);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[] { 0, 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panel.setLayout(gbl_panel);
+
+		JButton button_2 = new JButton(">");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+
+		JButton button_1 = new JButton("<");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+
 		JButton button = new JButton("<<");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -182,75 +187,86 @@ public class PanelValoracionMateria extends JFrame {
 		gbc_button.insets = new Insets(0, 0, 5, 5);
 		gbc_button.gridx = 1;
 		gbc_button.gridy = 1;
-		panel_3.add(button, gbc_button);
-		
-		JButton button_1 = new JButton("<");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		panel.add(button, gbc_button);
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
 		gbc_button_1.insets = new Insets(0, 0, 5, 5);
 		gbc_button_1.gridx = 1;
 		gbc_button_1.gridy = 2;
-		panel_3.add(button_1, gbc_button_1);
-		
-		JButton button_2 = new JButton(">");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		panel.add(button_1, gbc_button_1);
 		GridBagConstraints gbc_button_2 = new GridBagConstraints();
 		gbc_button_2.insets = new Insets(0, 0, 5, 5);
 		gbc_button_2.gridx = 1;
 		gbc_button_2.gridy = 3;
-		panel_3.add(button_2, gbc_button_2);
-		
+		panel.add(button_2, gbc_button_2);
+
 		JButton button_3 = new JButton(">>");
 		GridBagConstraints gbc_button_3 = new GridBagConstraints();
 		gbc_button_3.insets = new Insets(0, 0, 5, 5);
 		gbc_button_3.gridx = 1;
 		gbc_button_3.gridy = 4;
-		panel_3.add(button_3, gbc_button_3);
-		
-		JList list = new JList();
-		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.gridheight = 4;
-		gbc_list.gridwidth = 2;
-		gbc_list.insets = new Insets(0, 0, 0, 5);
-		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 0;
-		gbc_list.gridy = 1;
-		panel_1.add(list, gbc_list);
-		
-		JList list_1 = new JList();
-		GridBagConstraints gbc_list_1 = new GridBagConstraints();
-		gbc_list_1.gridwidth = 2;
-		gbc_list_1.gridheight = 4;
-		gbc_list_1.fill = GridBagConstraints.BOTH;
-		gbc_list_1.gridx = 7;
-		gbc_list_1.gridy = 1;
-		panel_1.add(list_1, gbc_list_1);
-		
-		JPanel panel_2 = new JPanel();
-		GridBagConstraints gbc_panel_2 = new GridBagConstraints();
-		gbc_panel_2.fill = GridBagConstraints.BOTH;
-		gbc_panel_2.gridx = 0;
-		gbc_panel_2.gridy = 2;
-		contentPane.add(panel_2, gbc_panel_2);
-		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel_2.rowHeights = new int[]{0, 0};
-		gbl_panel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_2.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		panel_2.setLayout(gbl_panel_2);
-		
+		panel.add(button_3, gbc_button_3);
+
+		listSeleccionado = new JList();
+		GridBagConstraints gbc_listSeleccionado = new GridBagConstraints();
+		gbc_listSeleccionado.fill = GridBagConstraints.BOTH;
+		gbc_listSeleccionado.gridx = 6;
+		gbc_listSeleccionado.gridy = 1;
+		panelCentro.add(listSeleccionado, gbc_listSeleccionado);
+
+		JPanel panelAbajo = new JPanel();
+		GridBagConstraints gbc_panelAbajo = new GridBagConstraints();
+		gbc_panelAbajo.fill = GridBagConstraints.BOTH;
+		gbc_panelAbajo.gridx = 0;
+		gbc_panelAbajo.gridy = 2;
+		add(panelAbajo, gbc_panelAbajo);
+		GridBagLayout gbl_panelAbajo = new GridBagLayout();
+		gbl_panelAbajo.columnWidths = new int[] { 0, 0 };
+		gbl_panelAbajo.rowHeights = new int[] { 15, 0, 0, 0 };
+		gbl_panelAbajo.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gbl_panelAbajo.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		panelAbajo.setLayout(gbl_panelAbajo);
+
 		JButton btnGuardarLasNotas = new JButton("Guardar las notas de todos los alumnos seleccionados");
 		GridBagConstraints gbc_btnGuardarLasNotas = new GridBagConstraints();
-		gbc_btnGuardarLasNotas.insets = new Insets(0, 0, 0, 5);
-		gbc_btnGuardarLasNotas.gridx = 7;
-		gbc_btnGuardarLasNotas.gridy = 0;
-		panel_2.add(btnGuardarLasNotas, gbc_btnGuardarLasNotas);
+		gbc_btnGuardarLasNotas.insets = new Insets(0, 0, 5, 0);
+		gbc_btnGuardarLasNotas.gridx = 0;
+		gbc_btnGuardarLasNotas.gridy = 1;
+		panelAbajo.add(btnGuardarLasNotas, gbc_btnGuardarLasNotas);
+
+		cargarMaterias();
+		cargarProfesores();
+		cargarNotas();
+	}
+
+	/**
+	 * 
+	 */
+	private void cargarMaterias() {
+		List<Materia> lista = (List<Materia>) ControladorMateria.getInstance().findAll();
+
+		for (Materia m : lista) {
+			this.comboBoxMateria.addItem(m);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void cargarProfesores() {
+		List<Profesor> lista = (List<Profesor>) ControladorProfesor.getInstance().findAll();
+
+		for (Profesor p : lista) {
+			this.comboBoxProfesor.addItem(p);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void cargarNotas() {
+		for (int i = 0; i <= 10; i++) {
+			this.comboBoxNota.addItem(i);
+		}
 	}
 
 }

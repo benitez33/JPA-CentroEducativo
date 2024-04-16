@@ -5,7 +5,7 @@ import javax.swing.JTabbedPane;
 
 import CentroEducativo.vistas.PanelValoracionMateria;
 
-public class Principal extends JFrame {
+public class Principal extends JFrame{
 
 	static Principal instance = null;
 
@@ -15,10 +15,9 @@ public class Principal extends JFrame {
 		}
 		return instance;
 	}
-
-	JTabbedPane panelTabbed;
-	PanelValoracionMateria panelValoracionMateria; 
-
+	
+	PanelValoracionMateria panelValoracionMateria;
+	
 	public PanelValoracionMateria getPanelValoracionMateria() {
 		return panelValoracionMateria;
 	}
@@ -27,26 +26,14 @@ public class Principal extends JFrame {
 		this.panelValoracionMateria = panelValoracionMateria;
 	}
 
-	public void setPanelTabbed(JTabbedPane panelTabbed) {
-		this.panelTabbed = panelTabbed;
-	}
-
 	public Principal() {
-		super("Gestion de centro Educativo");
-		this.setBounds(0, 0, 600, 450);
-		panelTabbed = new JTabbedPane();
-
+		super("Gestion valoración materia");
+		this.setBounds(0,0,600,450);
+		
 		panelValoracionMateria = new PanelValoracionMateria();
 		
-		panelTabbed.addTab("Valoracion materia: ", panelValoracionMateria);
-		panelTabbed.setSelectedIndex(0);
-
-		this.getContentPane().add(panelTabbed);
-
-	}
-
-	public JTabbedPane getPanelTabbed() {
-		return panelTabbed;
+		this.getContentPane().add(panelValoracionMateria);
+		
 	}
 
 	public static void main(String[] args) {

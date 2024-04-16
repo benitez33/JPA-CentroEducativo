@@ -5,11 +5,10 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="Centro Educativo"
 		transaction-type="RESOURCE_LOCAL">
-		<class>CentroEducativo.entiades.Materia</class>
-		<class>CentroEducativo.entiades.Profesor</class>
-		<class>CentroEducativo.entiades.Estudiante</class>
-		<class>CentroEducativo.entiades.ValoracionMateria</class>
-
+		<class>CentroEducativo.entidades.Materia</class>
+		<class>CentroEducativo.entidades.Profesor</class>
+		<class>CentroEducativo.entidades.Estudiante</class>
+		<class>CentroEducativo.entidades.ValoracionMateria</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
