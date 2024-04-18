@@ -42,7 +42,6 @@ public class PanelValoracionMateria extends JPanel {
 	private DefaultListModel<Estudiante> listMNoSeleccionados;
 	private DefaultListModel<Estudiante> listMSeleccionados;
 	private JFormattedTextField jftf;
-	Date fecha;
 
 	/**
 	 * Create the panel.
@@ -323,19 +322,18 @@ public class PanelValoracionMateria extends JPanel {
 	 */
 	private void guardar() {
 		List<Estudiante> estudiantes = getEstudiantesSeleccionados();
-		
+
 		if (estudiantes != null) {
 			for (Estudiante estudiante : estudiantes) {
-				if (SuperControlador.obtenerNota(estudiante,
-						(Profesor) this.comboBoxProfesor.getSelectedItem(),
+				if (SuperControlador.obtenerNota(estudiante, (Profesor) this.comboBoxProfesor.getSelectedItem(),
 						(Materia) this.comboBoxMateria.getSelectedItem()) == null) {
 					ControladorValoracionMateria.insert(estudiante, (Profesor) this.comboBoxProfesor.getSelectedItem(),
 							(Materia) this.comboBoxMateria.getSelectedItem(),
-							(Integer) this.comboBoxNota.getSelectedItem(), fecha);
+							(Integer) this.comboBoxNota.getSelectedItem(), (Date) this.jftf.getValue());
 				} else {
 					ControladorValoracionMateria.update(estudiante, (Profesor) this.comboBoxProfesor.getSelectedItem(),
 							(Materia) this.comboBoxMateria.getSelectedItem(),
-							(Integer) this.comboBoxNota.getSelectedItem(), fecha);
+							(Integer) this.comboBoxNota.getSelectedItem(), (Date) this.jftf.getValue());
 				}
 			}
 		}

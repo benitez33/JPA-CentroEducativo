@@ -8,26 +8,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="profesor")
-public class Profesor extends Entidad{
+@Table(name = "profesor")
+public class Profesor extends Entidad {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
-	@Column(name="apellido1")
+	@Column(name = "apellido1")
 	private String apellido_1;
-	@Column(name="apellido2")
+	@Column(name = "apellido2")
 	private String apellido_2;
-	
+
 	public Profesor() {
 		super();
 	}
-	
+
 	@Override
 	public String toString() {
-		return ( nombre + " " + apellido_1  + " " + apellido_2 );
+		return (nombre + " " + apellido_1 + " " + apellido_2);
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -43,15 +43,15 @@ public class Profesor extends Entidad{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getApellido_1() {
 		return apellido_1;
 	}
-	
+
 	public void setApellido_1(String apellido_1) {
 		this.apellido_1 = apellido_1;
 	}
-	
+
 	public String getApellido_2() {
 		return apellido_2;
 	}

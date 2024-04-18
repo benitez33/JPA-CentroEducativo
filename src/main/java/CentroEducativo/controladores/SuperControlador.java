@@ -55,16 +55,15 @@ public class SuperControlador {
 	public static ValoracionMateria obtenerNota(Estudiante estudiante, Profesor profesor, Materia materia) {
 		try {
 			return (ValoracionMateria) getEntityManager().createNativeQuery(
-					"SELECT * FROM valoracionmateria where " + estudiante.getId() + " = idEstudiante and " + profesor.getId()
-							+ " = idProfesor and " + materia.getId() + " = idMateria;",
+					"SELECT * FROM valoracionmateria where " + estudiante.getId() + " = idEstudiante and "
+							+ profesor.getId() + " = idProfesor and " + materia.getId() + " = idMateria;",
 					ValoracionMateria.class).getSingleResult();
-		}
-		catch (NoResultException ex) {
+		} catch (NoResultException ex) {
 			return null;
 		}
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param estudiante
@@ -73,19 +72,19 @@ public class SuperControlador {
 	 * @param nota
 	 * @return
 	 */
-	public static ValoracionMateria ordenarEstudiantes(Estudiante estudiante, Profesor profesor, Materia materia, Integer nota) {
+	public static ValoracionMateria ordenarEstudiantes(Estudiante estudiante, Profesor profesor, Materia materia,
+			Integer nota) {
 		try {
-			return (ValoracionMateria) getEntityManager().createNativeQuery(
-					"SELECT * FROM valoracionmateria where " + estudiante.getId() + " = idEstudiante and " + profesor.getId()
-							+ " = idProfesor and " + materia.getId() + " = idMateria and " + nota + " = valoracion;",
-					ValoracionMateria.class).getSingleResult();
-		}
-		catch (NoResultException ex) {
+			return (ValoracionMateria) getEntityManager().createNativeQuery("SELECT * FROM valoracionmateria where "
+					+ estudiante.getId() + " = idEstudiante and " + profesor.getId() + " = idProfesor and "
+					+ materia.getId() + " = idMateria and " + nota + " = valoracion;", ValoracionMateria.class)
+					.getSingleResult();
+		} catch (NoResultException ex) {
 			return null;
 		}
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param estudiante
@@ -101,13 +100,13 @@ public class SuperControlador {
 		v.setIdProfesor(profesor.getId());
 		v.setValoracion(nota);
 		v.setFecha(fecha);
-		
+
 		em.getTransaction().begin();
 		em.persist(v);
 		em.getTransaction().commit();
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param estudiante
@@ -118,13 +117,13 @@ public class SuperControlador {
 	 */
 	public static void update(Estudiante estudiante, Profesor profesor, Materia materia, Integer nota, Date fecha) {
 		ValoracionMateria v = obtenerNota(estudiante, profesor, materia);
-		
+
 		v.setValoracion(nota);
 		v.setFecha(fecha);
-		
+
 		em.getTransaction().begin();
 		em.persist(v);
 		em.getTransaction().commit();
-		
+
 	}
 }

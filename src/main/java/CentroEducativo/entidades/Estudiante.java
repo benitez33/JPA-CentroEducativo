@@ -8,15 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name ="estudiante")
-public class Estudiante extends Entidad{
+@Table(name = "estudiante")
+public class Estudiante extends Entidad {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
-	@Column(name="apellido1")
+	@Column(name = "apellido1")
 	private String apellido_1;
-	@Column(name="apellido2")
+	@Column(name = "apellido2")
 	private String apellido_2;
 
 	public Estudiante() {
@@ -25,9 +25,9 @@ public class Estudiante extends Entidad{
 
 	@Override
 	public String toString() {
-		return  nombre +" "+ apellido_1 +" "+ apellido_2 ;
+		return nombre + " " + apellido_1 + " " + apellido_2;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -43,7 +43,7 @@ public class Estudiante extends Entidad{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getApellido_1() {
 		return apellido_1;
 	}
